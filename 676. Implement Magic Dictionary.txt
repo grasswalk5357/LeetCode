@@ -1,0 +1,50 @@
+public class MagicDictionary {
+    
+    HashSet<string> map ;
+    /** Initialize your data structure here. */
+    public MagicDictionary() {
+        map = new HashSet<string>();
+    }
+    
+    public void BuildDict(string[] dictionary) {
+        for(int i = 0; i < dictionary.Length; i++){
+            if (!map.Contains(dictionary[i]))
+                map.Add(dictionary[i]);
+        }
+    }
+    
+    public bool Search(string searchWord) {
+        bool res = false;
+        char[] chs = searchWord.ToCharArray();
+        
+        foreach(var key in map){
+            int notMatch = 0;            
+            if (key.Length == searchWord.Length){
+                char[] chs_key = key.ToCharArray();
+                
+                for(int i = 0; i < key.Length; i++){
+                    if (chs_key[i] != chs[i]) {
+                        if (notMatch == 0)
+                            notMatch++;
+                        else if (notMatch >= 1){
+                            res = false;
+                            notMatch = 0;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            if (notMatch == 1)               
+                return true;
+        }
+        return res;
+    }
+}
+
+/**
+ * Your MagicDictionary object will be instantiated and called as such:
+ * MagicDictionary obj = new MagicDictionary();
+ * obj.BuildDict(dictionary);
+ * bool param_2 = obj.Search(searchWord);
+ */

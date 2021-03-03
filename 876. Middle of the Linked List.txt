@@ -1,0 +1,30 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int val=0, ListNode next=null) {
+ *         this.val = val;
+ *         this.next = next;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode MiddleNode(ListNode head) {
+            ListNode newHead = new ListNode(-1, head);
+            int count = 0;
+            while (head != null) {
+                count++;
+                head = head.next;
+            }
+            int half = count / 2;
+            newHead = newHead.next;
+            while (half > 0) {
+                if (newHead != null) {
+                    half--;
+                    newHead = newHead.next;
+                }
+            }
+            return newHead;
+    }
+}

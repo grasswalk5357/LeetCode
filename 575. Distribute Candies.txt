@@ -1,0 +1,11 @@
+public class Solution {
+    public int DistributeCandies(int[] candyType) {
+            HashSet<int> set = new HashSet<int>();
+            int half = candyType.Length / 2;
+            foreach (var t in candyType)
+                if (!set.Contains(t))
+                    set.Add(t);
+
+            return (set.Count < half) ? set.Count : half;
+    }
+}

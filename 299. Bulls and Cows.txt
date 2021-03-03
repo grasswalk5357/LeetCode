@@ -1,0 +1,26 @@
+public class Solution {
+    public string GetHint(string secret, string guess) {
+            int countA = 0;
+            int countB = 0;            
+            List<char> chs_sec = secret.ToCharArray().ToList();
+            List<char> chs_gue = guess.ToCharArray().ToList();
+            int idx = 0;
+        
+            while (idx != chs_sec.Count) {
+                if (chs_sec[idx] == chs_gue[idx]) {
+                    countA++;
+                    chs_sec.RemoveAt(idx);
+                    chs_gue.RemoveAt(idx);
+                }
+                else
+                    idx++;
+            }
+            for (int i = 0; i < chs_sec.Count; i++) {
+                if (chs_gue.Contains(chs_sec[i])){
+                    countB++;
+                    chs_gue.RemoveAt(chs_gue.IndexOf(chs_sec[i]));
+                }
+            }
+            return countA + "A" + countB + "B";
+    }
+}

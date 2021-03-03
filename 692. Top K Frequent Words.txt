@@ -1,0 +1,38 @@
+public IList<string> TopKFrequent(string[] words, int k)
+        {
+            var dict = new Dictionary<string, int>();
+            foreach (var word in words)
+            {
+                if (dict.ContainsKey(word))                
+                    dict[word] += 1;                
+                else                
+                    dict[word] = 1;                
+            }
+
+            var dict2 = new SortedDictionary<int, List<string>>();
+            foreach (var item in dict)
+            {
+                int occurrences = item.Value;
+                var word = item.Key;
+                if (dict2.ContainsKey(occurrences)){
+                    dict2[occurrences].Add(word);
+                    dict2[occurrences].Sort();
+                }
+                else {
+                    dict2[occurrences] = new List<string>() { word };
+                }
+            }
+
+            var ans = new List<string>();
+            foreach (var item in dict2.Reverse())
+            {
+                if (k == 0) break;
+                foreach (var word in item.Value)
+                {
+                    ans.Add(word);
+                    k--;
+                    if (k == 0) break;
+                }
+            }
+            return ans;
+        }

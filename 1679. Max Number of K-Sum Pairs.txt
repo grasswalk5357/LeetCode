@@ -1,0 +1,25 @@
+public class Solution {
+    public int MaxOperations(int[] nums, int k) {
+            int count = 0;
+            Dictionary<int, int> set = new Dictionary<int, int>();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (set.ContainsKey(k - nums[i]))
+                {
+                    count++;
+                    set[k - nums[i]]--;
+                    if (set[k - nums[i]] == 0)
+                        set.Remove(k - nums[i]);                    
+                }
+                else
+                {
+                    if (set.ContainsKey(nums[i]))                    
+                        set[nums[i]]++;                    
+                    else
+                        set.Add(nums[i], 1);                    
+                }
+            }
+            return count;
+    }
+}
